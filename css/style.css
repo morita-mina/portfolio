@@ -1,0 +1,1102 @@
+@charset "UTF-8";
+@import url(reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Kiwi+Maru&display=swap');
+
+
+
+body {
+  margin: 0;
+  background: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+   color: #171717;
+  line-height: 1.8;
+}
+
+.container.top {
+  width: 100%;
+  max-width: 1440px;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* 背景 */
+.top-pc .floor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1440px;
+  height: auto;
+  z-index: 0;
+}
+
+
+/* 子どもたち */
+.top-pc .child-green {
+  position: absolute;
+  width: 1440px;
+  z-index: 2;
+}
+
+.top-pc .child-blue {
+  position: absolute;
+  width: 1440px;
+  z-index: 3;
+}
+
+.top-pc .child-tanuki {
+  position: absolute;
+  width: 1440px;
+  z-index: 3;
+}
+
+.top-sp {
+  display: none;
+}
+
+/* ナビ（縦書き） */
+
+/* ▼ 縦ナビ（初期表示） */
+
+.nav-vertical {
+  position: absolute;
+  top: 60px;
+  right: 100px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 20px;
+  line-height: 2;
+  letter-spacing: 5px;
+  z-index: 5;
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #888;
+  transition: opacity 0.5s;
+}
+
+.nav-vertical li {
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.nav-vertical a,
+.nav-horizontal a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-vertical a:hover
+.nav-horizontal a:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+/* ▼ 横ナビ（非表示状態） */
+.nav-horizontal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: 0.5s ease;
+  z-index: 9999;
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #888;
+  font-size: 16px;
+}
+
+/* ▼ 横ナビ表示状態（JSでつけるクラス） */
+.nav-horizontal.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  background-color: #fff;
+}
+
+.nav-vertical ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-vertical a:hover {
+  opacity: 0.7;
+}
+
+.nav-horizontal ul {
+  display: flex;
+  gap: 40px;
+  margin-right: 80px;
+  list-style: none;
+}
+
+.nav-horizontal a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.nav-horizontal a:hover {
+  opacity: 0.7;
+}
+
+
+
+/* しずく */
+.drop {
+  position: absolute;
+  width: 130px;
+  height: auto;
+  z-index: 1;
+}
+
+.drop1 {
+  top: 200px;
+  right: 250px;
+}
+
+.drop2 {
+  top: 280px;
+  right: 80px;
+}
+
+.drop3 {
+  top: 600px;
+  right: 250px;
+}
+
+/* ロゴ部分 */
+.logo {
+  position: absolute;
+  right: 120px;
+  top: 450px;
+  text-align: left;
+  font-family: "Itim", cursive;
+  line-height: 2.3em;
+}
+
+.logo .mina {
+  font-size: 56px;
+  font-weight: 400;
+}
+
+.logo .desc {
+  color: #687F9D;
+  font-size: 20px;
+  padding-top: 10px;
+  line-height: 1em;
+}
+
+.logo .name {
+  font-size: 48px;
+  font-weight: 400;
+  margin: 0;
+  padding-bottom: 5px;
+   font-family: "Itim", cursive;
+}
+
+.logo .note {
+  font-size: 12px;
+  color: #687F9D;
+  border-top: 1.5px solid #687F9D;
+  font-family: "Kiwi Maru", serif;
+  margin: 0;
+}
+
+/* ========== アニメーション設定 ========== */
+
+/* 初期状態：すべて非表示（床以外） */
+.floor,
+.puddle,
+.child-green,
+.child-blue,
+.child-tanuki,
+.logo {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* アニメーション共通設定 */
+@keyframes fadeInSoft {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* 床（最後にふわっと出現） */
+.floor {
+  animation: fadeIn 2s ease-out forwards;
+  animation-delay: 3s;
+}
+
+/* 青の子 */
+.child-blue {
+  animation: fadeIn 1.5s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* 狸の子 */
+.child-tanuki {
+  animation: fadeIn 1.5s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+/* 緑の子 */
+.child-green {
+  animation: fadeIn 1.5s ease-out forwards;
+  animation-delay: 1.9s;
+}
+
+/* ナビ・ロゴ共通の初期状態 */
+.nav-vertical,
+.logo,
+.drop {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* 下からふわっとスライドイン */
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ナビ */
+.nav-vertical {
+  animation: slideUpFade 1.8s ease-out forwards;
+  animation-delay: 3.5s; /* 床と同じタイミング */
+}
+
+/* ロゴ */
+.logo {
+  animation: slideUpFade 1.8s ease-out forwards;
+  animation-delay: 4s; /* ほんの少し遅らせて自然に */
+}
+
+/* ===== しずくフェードイン＆ゆらゆらアニメーション ===== */
+
+/* フェードイン時の初期状態 */
+.drop {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: dropFadeIn 1.8s ease-out forwards;
+  animation-delay: 4.6s;
+}
+
+/* フェードイン＋ゆらゆらを順番に再生するためのアニメーション設定 */
+@keyframes dropFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* ゆらゆら（スイング）アニメーション */
+/* 横揺れアニメーション */
+@keyframes swing {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}
+
+/* しずく共通（フェードイン＋横揺れ） */
+.drop1 {
+  animation: dropFadeIn 1.8s ease-out forwards, swing 3s ease-in-out infinite;
+  animation-delay: 4.6s, 6s; /* 6sでゆらゆら開始 */
+}
+
+.drop2 {
+  animation: dropFadeIn 1.8s ease-out forwards, swing 3s ease-in-out infinite;
+  animation-delay: 4.9s, 7.2s; /* ちょっと遅らせて動きずらす */
+}
+
+/*トップ以下*/
+
+section {
+  position: relative;
+  z-index: 10;
+}
+
+.container.section {
+  width: 1040px;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.section-title {
+  font-family: 'Kiwi Maru', serif;
+  font-size: 28px;
+  color: #687F9D;
+  margin-bottom: 30px;
+    border-bottom: 1.5px dashed #687F9D;
+  line-height: 1.5em;
+}
+
+/* ===== お知らせセクション ===== */
+#news-section {
+  position: relative;
+  width: 1200px;
+  margin: 100px auto;
+  height: 250px; /* 全体の高さを指定（波をしっかり見せる） */
+  overflow: hidden;
+}
+
+/* 波背景 */
+.wave-bg {
+  position: absolute;
+  bottom: 0; /* ← 波を下に配置（お知らせの背景として） */
+  left: 0;
+  width: 100%;
+  height: 350px;
+  z-index: 0;
+}
+
+.wave-bg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 本文 */
+.news-content {
+  position: relative;
+  z-index: 1;
+  padding: 40px 60px;
+  color: #171717;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.news-list li {
+  margin-bottom: 16px;
+}
+
+.news-list a {
+  text-decoration: none;
+  color: #171717;
+  transition: 0.3s;
+}
+
+.news-list a:hover {
+  color: #687F9D;
+  text-decoration: underline;
+}
+
+/* ===== ニュースセクションのしずく（静止） ===== */
+#news-section .news-drop1 {
+  position: absolute;
+  width: 250px;
+  height: auto;
+  z-index: 2; 
+    bottom: 0px;
+  right: 50px;
+}
+
+/* =============================
+      共通
+============================= */
+
+.container {
+  width: 1200px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* フェードアップ（下からゆっくり出現） */
+.fade-up {
+  opacity: 0 !important;                 /* 既存スタイルより優先 */
+  transform: translateY(30px) !important;
+  transition: opacity 10s cubic-bezier(.22,.9,.35,1),
+              transform 1.1s cubic-bezier(.22,.9,.35,1);
+  will-change: transform, opacity;
+}
+
+/* 表示状態 */
+.fade-up.show {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+
+
+/* =============================
+      自己紹介セクション
+============================= */
+
+/* 自己紹介セクション */
+#about-section {
+  padding: 0;
+}
+
+
+/* 画像＋テキストを横並び */
+.about-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
+.about-text .name {
+  font-family: "Kiwi Maru", serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #171717;
+}
+
+.about-text p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  color: #171717;
+}
+
+/* =============================
+      作品セクション
+============================= */
+
+#works-section {
+  padding: 120px 0;
+  position: relative;
+  z-index: 10;
+}
+
+#works-section .section-title {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+/* 各作品ブロック */
+.work-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 120px;
+}
+
+/* 左右反転（画像とテキストの位置を交互に） */
+.work-item.reverse {
+  flex-direction: row-reverse;
+}
+
+/* 画像部分 */
+.work-image {
+  flex: 1;
+  max-width: 450px;
+}
+
+.work-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow:0 25px 65px rgba(30, 85, 128, 0.2);
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.work-image:hover img {
+  transform: translateY(6px) scale(0.97);
+  filter: brightness(0.9);
+}
+
+/* テキスト部分 */
+.work-text {
+  flex: 1;
+  font-family: "Noto Sans JP", sans-serif;
+  padding: 64px;
+}
+
+.work-note {
+  font-size: 13px;
+  margin-bottom: 6px;
+  font-weight: 400;
+  display: block;
+  font-family: "Noto Sans JP", sans-serif;
+  color: #687F9D;
+}
+
+.work-text h3 {
+  font-family: "Kiwi Maru", serif;
+  font-size: 26px;
+  color: #333435;
+  margin: 4px 0 14px;
+}
+
+.work-text p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.more-btn-wrapper {
+  text-align: right; /* ボタンを右寄せ */
+}
+
+/* ベース */
+.more-btn {
+  display: inline-flex;      /* 文字と画像を横並び */
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  color: #687F9D;;
+  text-decoration: none;
+  position: relative;
+  padding: 6px,0,3px,0;
+}
+
+/* 下線（通常は非表示） */
+.more-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 1px;
+  background-color: #687F9D;
+  transition: width 0.3s ease;
+}
+
+/* ホバー：下線が左→右へ伸びる */
+.more-btn:hover::after {
+  width: 100%;
+}
+
+/* 矢印画像 */
+.more-btn .arrow-icon {
+  width: 22px;  /* 好みで調整 */
+  height: auto;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* ホバーで矢印がちょっと右へ動く（おしゃれ） */
+.more-btn:hover .arrow-icon {
+  transform: translateX(3px);
+}
+
+.more-btn-all {
+  display: inline-block;
+  padding: 10px 58px;
+  background-color: #687F9D;
+  color: #fff;
+  font-size: 24px;
+  border-radius: 80px; /* 丸いボタン */
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.more-btn-all:hover {
+  background-color: #94adcd; /* ホバー：濃い青 */
+}
+
+.more-btn-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+
+footer {
+  text-align: right;
+}
+/* ===== お問い合わせ ===== */
+.contact-section {
+  position: relative;
+  margin-top: 80px;
+  padding: 120px 0 80px;
+  background: #E0EEFE;
+  overflow: hidden;
+}
+
+/* 波背景 */
+.contact-wave {
+  position: absolute;
+  top: -80px;      /* 波の入り方を調整 */
+  left: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.contact-wave svg {
+  width: 100%;
+  height: auto;
+}
+
+/* 背景より手前に表示 */
+#contact-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+#contact-section .mail {
+  font-size: 20px;
+  color: #546C85;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.oto {
+  text-align: center;
+}
+
+.mail {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #687F9D;
+  font-size: 16px;
+}
+
+.mail a {
+  color: #546C85;
+  text-decoration: none;
+}
+
+.mail a:hover {
+  opacity: 0.7;
+}
+
+.mail-btn-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.mail-btn {
+  display: inline-block;
+  background: #687F9D;  /* 青 */
+  color: #fff;
+  padding: 12px 50px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 24px;
+  transition: 0.3s;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.mail-btn:hover {
+  background: #8fa7c2; /* 少し濃くする */
+}
+
+.saigo {
+  text-align: right;
+}
+
+/*お知らせ用追加モーダル設定*/
+#news-modal {
+  display: none; /* 初期は非表示 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6); /* 背景を半透明の黒に */
+  justify-content: center; /* 中央寄せ */
+  align-items: center;
+  z-index: 1000; /* 他の要素より上に */
+}
+
+.news-modal-content {
+  background-color: #fff;
+  padding: 30px 20px;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.news-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.news-modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.news-modal-body {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+
+
+/* ===== 波アニメーション ===== */
+.wave {
+  width: 100%;
+  height: 200px;
+}
+
+
+
+/* ============================= 
+      レスポンシブ対応（スマホ）
+============================= */
+/* PC表示ではモバイルメニューを隠す */
+@media screen and (min-width: 769px) {
+  .mobile-menu,
+  .hamburger {
+    display: none !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  /* コンテナ */
+  .container.top {
+    height: auto;
+    padding-bottom: 30px;
+  }
+
+  .top-pc { display: none !important; }
+  .top-sp { display: block !important; 
+    width: 100%;
+  height: 500px;
+overflow: hidden; }
+
+
+/* 背景（床） */
+.top-sp .floor {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+/* 子どもたち（スマホ版） */
+.top-sp .child-green,
+.top-sp .child-blue,
+.top-sp .child-tanuki {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 2;
+}
+
+  .top-sp img { width: 100%; height: auto; display: block; }
+  .nav-vertical { display: none !important; }
+  .nav-horizontal {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  /* スマホ用の床 */
+  .top-sp .floor-mob {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+  }
+
+  /* ▼スマホ版の子どもたち */
+  .top-sp .child-green-mob,
+  .top-sp .child-blue-mob,
+  .top-sp .child-tanuki-mob {
+    position: absolute;
+    width: 100%;   /* ←画像の比率そのまま合わせるため */
+    left: 0;
+  }
+
+  /* z-index だけ調整（重なり順）*/
+  .child-green-mob { z-index: 2; }
+  .child-blue-mob { z-index: 3; }
+  .child-tanuki-mob { z-index: 4; }
+
+
+  
+/* ========== アニメーション設定 ========== */
+
+/* 初期状態：すべて非表示（床以外） */
+.floor-mob,
+.child-green-mob,
+.child-blue-mob,
+.child-tanuki-mob {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* アニメーション共通設定 */
+@keyframes fadeInSoft {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* 床（最後にふわっと出現） */
+.floor-mob {
+  animation: fadeIn 2s ease-out forwards;
+  animation-delay: 3s;
+}
+
+/* 青の子 */
+.child-blue-mob {
+  animation: fadeIn 1.5s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* 狸の子 */
+.child-tanuki-mob {
+  animation: fadeIn 1.5s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+/* 緑の子 */
+.child-green-mob {
+  animation: fadeIn 1.5s ease-out forwards;
+  animation-delay: 1.9s;
+}
+
+/* ナビ・ロゴ共通の初期状態 */
+.nav-vertical,
+.logo,
+.drop {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* 下からふわっとスライドイン */
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+  /* ------ 以下は他セクション（既存のまま） ------ */
+
+  .nav-vertical { display: none; }
+
+ /* 横ナビ → 非表示 */
+  .nav-horizontal {
+    display: none;
+  }
+
+/* ===== ハンバーガーメニュー ===== */
+.hamburger {
+  display: flex; /* デフォは非表示（PC用） */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  cursor: pointer;
+  width: 30px;
+  height: 22px;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #babcbd;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* 開いたときのアニメーション */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ===== モバイルメニュー ===== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: 0.4s ease;
+  z-index: 9999;
+}
+
+.mobile-menu.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu li {
+  margin: 15px 0;
+}
+
+.mobile-menu a {
+  font-size: 20px;
+  color: #687F9D;
+  text-decoration: none;
+}
+
+
+
+
+  .logo {
+    right: 20px;
+    top: 380px;
+    text-align: right;
+  }
+
+  .logo .mina { font-size: 40px; }
+  .logo .name { font-size: 34px; }
+  .logo .desc { font-size: 16px; }
+
+  .drop { display: none;}
+
+  .container.section {
+    width: 100%;
+    padding: 60px 20px;
+  }
+  
+  .section-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  #news-section { 
+   position: relative;
+  width: 100%;
+  margin: 40px auto 60px; /* ←上下の余白を小さく調整（100px → 40px） */
+  height: auto; /* ←高さ固定を解除 */
+  overflow: hidden;
+
+}
+
+  .news-content {
+      position: relative;
+  z-index: 1;
+  padding: 40px 20px 20px; /* ←下パディングを減らして空白を詰める */
+  color: #171717;
+  font-family: "Noto Sans JP", sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  }
+
+  .wave-bg,
+  .contact-wave,
+  .news-drop1 {
+    display: none;
+  }
+
+  #about-section { padding: 20px 20px; }
+  .about-flex { flex-direction: column; gap: 40px; }
+  .about-text .name {
+    font-size: 22px;
+  }
+  .about-text p {
+    font-size: 15px;
+  }
+  .about-text { max-width: 100%; }
+  .about-image {
+    width: 220px;;
+  }
+
+  #works-section { padding: 60px 0; }
+  .work-item { flex-direction: column; gap: 30px; margin-bottom: 80px; }
+  .work-item.reverse { flex-direction: column; }
+  .work-image { max-width: 100%; }
+  .work-text { padding: 20px; }
+  .work-text h3 { font-size: 22px; }
+  .work-text p { font-size: 15px; }
+
+  .more-btn-wrapper { text-align: center; }
+
+   .more-btn-wrap {
+    margin: 0;
+   }
+
+
+  #contact-section { padding: 60px 20px 10px; }
+  .contact-mail-btn { width: 200px; height: 46px; font-size: 15px; }
+  a.mail-btn {
+  width: 200px;
+  }
+  .mail-btn {
+    font-size: 20px; text-align: center;
+  }
+
+    .oto { text-align: left; font-size: 14px;}
+
+  footer {font-size: 12px;}
+
+}
