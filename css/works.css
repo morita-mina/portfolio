@@ -210,8 +210,6 @@ footer {
   text-align: right;
 }
 /* ===== お問い合わせ ===== */
-
-
 .contact-section {
   position: absolute;
   margin-top: -80px;
@@ -223,18 +221,25 @@ footer {
   overflow: hidden;
 }
 
-.section-title {
-  font-family: 'Kiwi Maru', serif;
-  font-size: 28px;
-  color: #687F9D;
-  margin-bottom: 30px;
-    border-bottom: 1.5px dashed #687F9D;
-  line-height: 1.5em;
-
+/* 波背景 */
+.contact-wave {
+  position: absolute;
+  top: -80px;      /* 波の入り方を調整 */
+  left: 0;
+  width: 100%;
+  z-index: 0;
 }
 
+.contact-wave svg {
+  width: 100%;
+  height: auto;
+}
 
-  #contact-section { padding: 60px 100px 10px; }
+/* 背景より手前に表示 */
+#contact-section .container {
+  position: relative;
+  z-index: 1;
+}
 
 #contact-section .mail {
   font-size: 20px;
@@ -283,9 +288,6 @@ footer {
 .mail-btn:hover {
   background: #8fa7c2; /* 少し濃くする */
 }
-
-.saigo { text-align: right;
-         font-size: 12px;}
 
 /* ===== モーダル（PC用） ===== */
 .modal {
@@ -460,7 +462,6 @@ footer {
 }
 
   #contact-section { padding: 60px 20px 10px; }
-
   .contact-mail-btn { width: 200px; height: 46px; font-size: 15px; }
   a.mail-btn {
   width: 200px;
