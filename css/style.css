@@ -294,13 +294,13 @@ body {
 /* ナビ */
 .nav-vertical {
   animation: slideUpFade 1.8s ease-out forwards;
-  animation-delay: 4s; /* 床と同じタイミング */
+  animation-delay: 3.5s; /* 床と同じタイミング */
 }
 
 /* ロゴ */
 .logo {
   animation: slideUpFade 1.8s ease-out forwards;
-  animation-delay: 4.4s; /* ほんの少し遅らせて自然に */
+  animation-delay: 4s; /* ほんの少し遅らせて自然に */
 }
 
 /* ===== しずくフェードイン＆ゆらゆらアニメーション ===== */
